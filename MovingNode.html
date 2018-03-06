@@ -1,0 +1,55 @@
+Randomly generated data traveling in a linear path. Utilizes heatmap.js
+	<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Heatmap Test Code</title>
+<script src='heatmap.min.js'></script>
+</head>
+<body>
+  <div id='heatMap' style="height: 742px">
+    <canvas width="1024" height="742" style="position:absolute; left: 0; top: 0"></canvas>
+  </div>
+</body>
+<script>
+
+	var intervalSeconds = 1;
+	var stoptimer = 0;
+
+	function randomHeatmapValues() {
+		stoptimer++;
+		for (var i = 0, len = testData.data.length ; i < len; i++){
+		 	testData.data[i].x += 10;
+		}
+		heatmapInstance.setData(testData);
+
+ 		if(stoptimer == 10){
+			clearInterval(intervalSeconds);
+		}
+
+	};
+
+	var testData = {
+	    min: 0,
+	    max: 100,
+	    data: [ {x: 400, y: 350, value: 90}]
+	};
+
+	var config = {
+		container: document.getElementById('heatMap'),
+		radius: 40,
+		gradient: {
+		'.4' : 'blue',
+		'.7': 'orange',
+		'.9': 'green'
+		}
+	}
+		
+
+	var heatmapInstance = h337.create(config);
+
+	randomHeatmapValues();
+	setInterval(randomHeatmapValues, intervalSeconds*1000);
+
+</script>
+</html>
